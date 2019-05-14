@@ -80,6 +80,7 @@
       name="plone.app.transmogrifier.redirector"
       />
 
+  <!-- disabled because `name` is a PythonIdentifier field and `plone.app.transmogrifier` is an invalid PythonIdentifer
   <transmogrifier:registerConfig
       name="plone.app.transmogrifier.xmlwalker"
       title="Web Site Importer"
@@ -87,5 +88,5 @@
                    extracting field and other values."
       configuration="xmlwalker.cfg"
       />
-
+  -->
 </configure>
