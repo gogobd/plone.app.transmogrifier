@@ -7,10 +7,12 @@
   <include package="zope.component" file="meta.zcml" />
   <include package="collective.transmogrifier" file="meta.zcml" />
 
-  <utility  zcml:condition="installed Products/Archetypes"
+   <!--
+  <utility  zcml:condition="installed Products.Archetypes"
       component=".atschemaupdater.ATSchemaUpdaterSection"
       name="plone.app.transmogrifier.atschemaupdater"
       />
+  -->
 
   <utility
       component=".workflowupdater.WorkflowUpdaterSection"
@@ -22,11 +24,12 @@
       name="plone.app.transmogrifier.browserdefault"
       />
 
+  <!--
   <utility
       component=".criteria.CriterionAdder"
       name="plone.app.transmogrifier.criterionadder"
       />
-
+  -->
   <utility
       component=".datesupdater.DatesUpdater"
       name="plone.app.transmogrifier.datesupdater"

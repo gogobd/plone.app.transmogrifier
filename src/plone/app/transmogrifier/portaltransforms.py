@@ -3,12 +3,12 @@ from Products.CMFCore.utils import getToolByName
 from collective.transmogrifier.interfaces import ISection
 from collective.transmogrifier.interfaces import ISectionBlueprint
 from collective.transmogrifier.utils import Matcher, Condition
-from zope.interface import classProvides, implements
+from zope.interface import provider, implementer
 
 
+@provider(ISectionBlueprint)
+@implementer(ISection)
 class PortalTransformsSection(object):
-    classProvides(ISectionBlueprint)
-    implements(ISection)
 
     def __init__(self, transmogrifier, name, options, previous):
         self.ptransforms = getToolByName(transmogrifier.context,

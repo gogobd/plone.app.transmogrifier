@@ -3,12 +3,12 @@ from collective.transmogrifier.interfaces import ISection, ISectionBlueprint
 from collective.transmogrifier.utils import Expression
 from collective.transmogrifier.utils import Matcher
 from plone.i18n.normalizer import urlnormalizer as normalizer
-from zope.interface import classProvides, implements
+from zope.interface import provider, implementer
 
 
 class URLNormalizerSection(object):
-    classProvides(ISectionBlueprint)
-    implements(ISection)
+    provider(ISectionBlueprint)
+    implementer(ISection)
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous

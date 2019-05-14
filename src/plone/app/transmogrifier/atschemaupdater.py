@@ -8,7 +8,7 @@ from collective.transmogrifier.utils import Matcher
 from collective.transmogrifier.utils import defaultKeys
 from collective.transmogrifier.utils import traverse
 from zope import event
-from zope.interface import classProvides, implements
+from zope.interface import provider, implementer
 
 
 def _compare(fieldval, itemval):
@@ -42,9 +42,9 @@ def set(field, obj, val):
         field.set(obj, val)
 
 
+@provider(ISectionBlueprint)
+@implementer(ISection)
 class ATSchemaUpdaterSection(object):
-    classProvides(ISectionBlueprint)
-    implements(ISection)
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous

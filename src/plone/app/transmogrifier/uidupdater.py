@@ -8,12 +8,12 @@ from collective.transmogrifier.utils import defaultKeys
 from collective.transmogrifier.utils import traverse
 from plone.uuid.interfaces import IAttributeUUID
 from plone.uuid.interfaces import IMutableUUID
-from zope.interface import classProvides, implements
+from zope.interface import provider, implementer
 
 
 class UIDUpdaterSection(object):
-    classProvides(ISectionBlueprint)
-    implements(ISection)
+    provider(ISectionBlueprint)
+    implementer(ISection)
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous

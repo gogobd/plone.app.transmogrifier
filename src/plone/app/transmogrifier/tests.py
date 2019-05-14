@@ -8,7 +8,7 @@ from collective.transmogrifier.sections.tests import _marker
 from collective.transmogrifier.sections.tests import sectionsSetUp as ctSectionsSetup  # noqa
 from collective.transmogrifier.tests import tearDown
 from zope.component import provideUtility
-from zope.interface import classProvides, implements
+from zope.interface import provider, implementer
 from zope.testing import doctest
 import posixpath
 import unittest
@@ -56,7 +56,7 @@ def aTSchemaUpdaterSetUp(test):  # noqa: C901
     from Products.Archetypes.interfaces import IBaseObject
 
     class MockPortal(MockObjectManager):
-        implements(IBaseObject)
+        implementer(IBaseObject)
 
         def hasObject(self, id_):
             path = posixpath.join(self._path, id_)
@@ -122,8 +122,8 @@ def aTSchemaUpdaterSetUp(test):  # noqa: C901
     test.globs['transmogrifier'].context = test.globs['plone']
 
     class SchemaSource(SampleSource):
-        classProvides(ISectionBlueprint)
-        implements(ISection)
+        provider(ISectionBlueprint)
+        implementer(ISection)
 
         def __init__(self, *args, **kw):
             super(SchemaSource, self).__init__(*args, **kw)
@@ -177,8 +177,8 @@ def workflowUpdaterSetUp(test):
     test.globs['transmogrifier'].context = test.globs['plone']
 
     class WorkflowSource(SampleSource):
-        classProvides(ISectionBlueprint)
-        implements(ISection)
+        provider(ISectionBlueprint)
+        implementer(ISection)
 
         def __init__(self, *args, **kw):
             super(WorkflowSource, self).__init__(*args, **kw)
@@ -225,7 +225,7 @@ def browserDefaultSetUp(test):
     from Products.CMFDynamicViewFTI.interface import ISelectableBrowserDefault
 
     class MockPortal(MockObjectManager):
-        implements(ISelectableBrowserDefault)
+        implementer(ISelectableBrowserDefault)
 
         def hasObject(self, id_):
             path = posixpath.join(self._path, id_)
@@ -250,8 +250,8 @@ def browserDefaultSetUp(test):
     test.globs['transmogrifier'].context = test.globs['plone']
 
     class BrowserDefaultSource(SampleSource):
-        classProvides(ISectionBlueprint)
-        implements(ISection)
+        provider(ISectionBlueprint)
+        implementer(ISection)
 
         def __init__(self, *args, **kw):
             super(BrowserDefaultSource, self).__init__(*args, **kw)
@@ -292,7 +292,7 @@ def urlNormalizerSetUp(test):
     from Products.CMFDynamicViewFTI.interface import ISelectableBrowserDefault
 
     class MockPortal(MockObjectManager):
-        implements(ISelectableBrowserDefault)
+        implementer(ISelectableBrowserDefault)
 
         def hasObject(self, id_):
             path = posixpath.join(self._path, id_)
@@ -308,8 +308,8 @@ def urlNormalizerSetUp(test):
     test.globs['transmogrifier'].context = test.globs['plone']
 
     class URLNormalizerSource(SampleSource):
-        classProvides(ISectionBlueprint)
-        implements(ISection)
+        provider(ISectionBlueprint)
+        implementer(ISection)
 
         def __init__(self, *args, **kw):
             super(URLNormalizerSource, self).__init__(*args, **kw)
@@ -332,7 +332,7 @@ def criteriaSetUp(test):
     from Products.ATContentTypes.interface import IATTopic
 
     class MockPortal(MockObjectManager):
-        implements(IATTopic)
+        implementer(IATTopic)
 
         def hasObject(self, id_):
             path = posixpath.join(self._path, id_)
@@ -353,8 +353,8 @@ def criteriaSetUp(test):
     test.globs['transmogrifier'].context = test.globs['plone']
 
     class CriteriaSource(SampleSource):
-        classProvides(ISectionBlueprint)
-        implements(ISection)
+        provider(ISectionBlueprint)
+        implementer(ISection)
 
         def __init__(self, *args, **kw):
             super(CriteriaSource, self).__init__(*args, **kw)
@@ -373,8 +373,8 @@ def mimeencapsulatorSetUp(test):
     sectionsSetUp(test)
 
     class EncapsulatorSource(SampleSource):
-        classProvides(ISectionBlueprint)
-        implements(ISection)
+        provider(ISectionBlueprint)
+        implementer(ISection)
 
         def __init__(self, *args, **kw):
             super(EncapsulatorSource, self).__init__(*args, **kw)
@@ -393,8 +393,8 @@ def mimeencapsulatorSetUp(test):
     class OFSFilePrinter(object):
 
         """Prints out data on any OFS.Image.File object in the item"""
-        classProvides(ISectionBlueprint)
-        implements(ISection)
+        provider(ISectionBlueprint)
+        implementer(ISection)
 
         def __init__(self, transmogrifier, name, options, previous):
             self.previous = previous
@@ -416,7 +416,7 @@ def uidSetUp(test):
     from Products.Archetypes.interfaces import IReferenceable
 
     class MockPortal(MockObjectManager):
-        implements(IReferenceable)
+        implementer(IReferenceable)
 
         def hasObject(self, id_):
             path = posixpath.join(self._path, id_)
@@ -444,8 +444,8 @@ def uidSetUp(test):
     test.globs['transmogrifier'].context = test.globs['plone']
 
     class UIDSource(SampleSource):
-        classProvides(ISectionBlueprint)
-        implements(ISection)
+        provider(ISectionBlueprint)
+        implementer(ISection)
 
         def __init__(self, *args, **kw):
             super(UIDSource, self).__init__(*args, **kw)
@@ -472,7 +472,7 @@ def reindexObjectSetup(test):
     from Products.Archetypes.interfaces import IBaseObject
 
     class MockPortal(MockObjectManager, CatalogAware):
-        implements(IBaseObject)
+        implementer(IBaseObject)
 
         def hasObject(self, id_):
             path = posixpath.join(self._path, id_)
@@ -503,8 +503,8 @@ def reindexObjectSetup(test):
     test.globs['transmogrifier'].context = test.globs['plone']
 
     class ReindexObjectSource(SampleSource):
-        classProvides(ISectionBlueprint)
-        implements(ISection)
+        provider(ISectionBlueprint)
+        implementer(ISection)
 
         def __init__(self, *args, **kw):
             super(ReindexObjectSource, self).__init__(*args, **kw)
@@ -533,8 +533,8 @@ def pathfixerSetUp(test):
     sectionsSetUp(test)
 
     class SchemaSource(SampleSource):
-        classProvides(ISectionBlueprint)
-        implements(ISection)
+        provider(ISectionBlueprint)
+        implementer(ISection)
 
         def __init__(self, *args, **kw):
             super(SchemaSource, self).__init__(*args, **kw)
@@ -600,8 +600,8 @@ def datesupdaterSetUp(test):  # noqa: C901
     test.globs['transmogrifier'].context = test.globs['plone']
 
     class SchemaSource(SampleSource):
-        classProvides(ISectionBlueprint)
-        implements(ISection)
+        provider(ISectionBlueprint)
+        implementer(ISection)
 
         def __init__(self, *args, **kw):
             super(SchemaSource, self).__init__(*args, **kw)

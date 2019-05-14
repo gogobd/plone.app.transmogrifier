@@ -3,13 +3,13 @@ from Products.CMFCore.utils import getToolByName
 from collective.transmogrifier.interfaces import ISection
 from collective.transmogrifier.interfaces import ISectionBlueprint
 from zope.annotation.interfaces import IAnnotations
-from zope.interface import classProvides, implements
+from zope.interface import provider, implementer
 
 VERSIONABLE_KEY = 'plone.app.transmogrifier.versioning:versionable'
 
 
 class BaseVersioningSection(object):
-    implements(ISection)
+    implementer(ISection)
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous
@@ -34,7 +34,7 @@ class BaseVersioningSection(object):
 
 
 class DisableVersioningSection(BaseVersioningSection):
-    classProvides(ISectionBlueprint)
+    provider(ISectionBlueprint)
 
     def __iter__(self):
         for item in self.previous:
@@ -58,7 +58,7 @@ class DisableVersioningSection(BaseVersioningSection):
 
 
 class EnableVersioningSection(BaseVersioningSection):
-    classProvides(ISectionBlueprint)
+    provider(ISectionBlueprint)
 
     def __iter__(self):
         for item in self.previous:

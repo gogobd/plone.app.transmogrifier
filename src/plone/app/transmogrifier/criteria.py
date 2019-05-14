@@ -4,12 +4,12 @@ from Products.ATContentTypes.interface import IATTopic
 from collective.transmogrifier.interfaces import ISection, ISectionBlueprint
 from collective.transmogrifier.utils import defaultMatcher
 from collective.transmogrifier.utils import traverse
-from zope.interface import classProvides, implements
+from zope.interface import provider, implementer
 
 
+@provider(ISectionBlueprint)
+@implementer(ISection)
 class CriterionAdder(object):
-    classProvides(ISectionBlueprint)
-    implements(ISection)
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous

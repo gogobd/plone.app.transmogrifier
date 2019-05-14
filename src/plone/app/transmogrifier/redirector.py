@@ -7,7 +7,7 @@ from collective.transmogrifier.utils import pathsplit
 from collective.transmogrifier.utils import traverse
 from plone.app.redirector.interfaces import IRedirectionStorage
 from zope.component import queryUtility
-from zope.interface import classProvides, implements
+from zope.interface import provider, implementer
 import logging
 import posixpath
 import urlparse
@@ -20,9 +20,9 @@ except ImportError:
     ElementBase = Element
 
 
+@provider(ISectionBlueprint)
+@implementer(ISection)
 class RedirectorSection(object):
-    classProvides(ISectionBlueprint)
-    implements(ISection)
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous
