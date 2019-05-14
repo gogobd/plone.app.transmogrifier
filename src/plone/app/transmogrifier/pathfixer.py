@@ -43,7 +43,7 @@ class PathFixer(object):
 
         for item in self.previous:
 
-            pathkey = self.pathkey(*item.keys())[0]
+            pathkey = self.pathkey(*list(item.keys()))[0]
             stripstring = self.stripstring
             prependstring = self.prependstring
 

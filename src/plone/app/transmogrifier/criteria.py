@@ -22,17 +22,17 @@ class CriterionAdder(object):
 
     def __iter__(self):
         for item in self.previous:
-            pathkey = self.pathkey(*item.keys())[0]
+            pathkey = self.pathkey(*list(item.keys()))[0]
             if not pathkey:
                 yield item
                 continue
 
-            criterionkey = self.criterionkey(*item.keys())[0]
+            criterionkey = self.criterionkey(*list(item.keys()))[0]
             if not criterionkey:
                 yield item
                 continue
 
-            fieldkey = self.fieldkey(*item.keys())[0]
+            fieldkey = self.fieldkey(*list(item.keys()))[0]
             if not fieldkey:
                 yield item
                 continue

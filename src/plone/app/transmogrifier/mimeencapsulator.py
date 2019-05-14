@@ -23,7 +23,7 @@ class MimeEncapsulatorSection(object):
 
     def __iter__(self):
         for item in self.previous:
-            key, match = self.datakey(*item.keys())
+            key, match = self.datakey(*list(item.keys()))
             if not key:
                 yield item
                 continue

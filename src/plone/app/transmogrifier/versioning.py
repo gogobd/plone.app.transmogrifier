@@ -8,8 +8,8 @@ from zope.interface import provider, implementer
 VERSIONABLE_KEY = 'plone.app.transmogrifier.versioning:versionable'
 
 
+@implementer(ISection)
 class BaseVersioningSection(object):
-    implementer(ISection)
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous
@@ -33,8 +33,8 @@ class BaseVersioningSection(object):
         versionable[:] = ()
 
 
+@provider(ISectionBlueprint)
 class DisableVersioningSection(BaseVersioningSection):
-    provider(ISectionBlueprint)
 
     def __iter__(self):
         for item in self.previous:
@@ -57,8 +57,8 @@ class DisableVersioningSection(BaseVersioningSection):
             self.restore()
 
 
+@provider(ISectionBlueprint)
 class EnableVersioningSection(BaseVersioningSection):
-    provider(ISectionBlueprint)
 
     def __iter__(self):
         for item in self.previous:

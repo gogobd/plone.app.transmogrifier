@@ -21,13 +21,13 @@ class BrowserDefaultSection(object):
 
     def __iter__(self):
         for item in self.previous:
-            pathkey = self.pathkey(*item.keys())[0]
+            pathkey = self.pathkey(*list(item.keys()))[0]
             if not pathkey:
                 yield item
                 continue
 
-            layoutkey = self.layoutkey(*item.keys())[0]
-            defaultpagekey = self.defaultpagekey(*item.keys())[0]
+            layoutkey = self.layoutkey(*list(item.keys()))[0]
+            defaultpagekey = self.defaultpagekey(*list(item.keys()))[0]
 
             path = item[pathkey]
 

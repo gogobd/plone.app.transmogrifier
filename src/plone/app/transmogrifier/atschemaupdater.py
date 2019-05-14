@@ -20,7 +20,7 @@ def _compare(fieldval, itemval):
     assume utf8 for the comparison.
 
     """
-    if isinstance(fieldval, str) and isinstance(itemval, unicode):
+    if isinstance(fieldval, str) and isinstance(itemval, str):
         return fieldval.decode('utf8', 'replace') == itemval
     return fieldval == itemval
 
@@ -58,7 +58,7 @@ class ATSchemaUpdaterSection(object):
 
     def __iter__(self):  # noqa: C901
         for item in self.previous:
-            pathkey = self.pathkey(*item.keys())[0]
+            pathkey = self.pathkey(*list(item.keys()))[0]
 
             if not pathkey:         # not enough info
                 yield item
@@ -74,7 +74,7 @@ class ATSchemaUpdaterSection(object):
             if IBaseObject.providedBy(obj):
                 changed = False
                 is_new_object = obj.checkCreationFlag()
-                for k, v in item.iteritems():
+                for k, v in item.items():
                     if k.startswith('_'):
                         continue
                     field = obj.getField(k)

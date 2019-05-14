@@ -26,7 +26,7 @@ class WorkflowUpdaterSection(object):
 
     def __iter__(self):  # noqa: C901
         for item in self.previous:
-            keys = item.keys()
+            keys = list(item.keys())
             pathkey = self.pathkey(*keys)[0]
             transitionskey = self.transitionskey(*keys)[0]
 
@@ -35,7 +35,7 @@ class WorkflowUpdaterSection(object):
                 continue
 
             path, transitions = item[pathkey], item[transitionskey]
-            if isinstance(transitions, basestring):
+            if isinstance(transitions, str):
                 transitions = (transitions,)
 
             obj = traverse(self.context, str(path).lstrip('/'), None)
@@ -44,7 +44,7 @@ class WorkflowUpdaterSection(object):
                 continue
 
             for transition in transitions:
-                if not isinstance(transition, basestring):
+                if not isinstance(transition, str):
                     state = transition['review_state']
                     time = transition['time']
                     action = transition.get('action')

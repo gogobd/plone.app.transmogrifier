@@ -10,7 +10,7 @@ from zope.component import queryUtility
 from zope.interface import provider, implementer
 import logging
 import posixpath
-import urlparse
+import urllib.parse
 
 
 from xml.etree.ElementTree import Element
@@ -55,7 +55,7 @@ class RedirectorSection(object):
                 yield item
                 continue
 
-            keys = item.keys()
+            keys = list(item.keys())
 
             # Update paths first
 
@@ -94,7 +94,7 @@ class RedirectorSection(object):
                             continue
 
                     leading = path[:-len(path.lstrip('/'))]
-                    url = urlparse.urlsplit(path)
+                    url = urllib.parse.urlsplit(path)
                     if self._is_external(url):
                         continue
 
@@ -105,9 +105,9 @@ class RedirectorSection(object):
                         old_path = posixpath.join(old_path, elem)
                         new_path = posixpath.join(new_path, elem)
                         new_path = storage.get(old_path, new_path)
-                    if not urlparse.urlsplit(new_path).netloc:
+                    if not urllib.parse.urlsplit(new_path).netloc:
                         new_path = leading + new_path[len(self.context_path):]
-                    new_path = urlparse.urlunsplit(
+                    new_path = urllib.parse.urlunsplit(
                         url[:2] + (new_path, ) + url[3:])
 
                     if new_path != path.lstrip('/'):
@@ -128,14 +128,14 @@ class RedirectorSection(object):
             oldpathskey = self.oldpathskey(*keys)[0]
             if oldpathskey and oldpathskey in item:
                 paths = item[oldpathskey]
-                if isinstance(paths, (str, unicode)):
+                if isinstance(paths, str):
                     paths = [paths]
                 old_paths.update(paths)
 
             pathkey = self.pathkey(*keys)[0]
             if pathkey:
                 path = item[pathkey]
-                url = urlparse.urlsplit(path)
+                url = urllib.parse.urlsplit(path)
                 new_path = (
                     self._is_external(url) and path or
                     posixpath.join(

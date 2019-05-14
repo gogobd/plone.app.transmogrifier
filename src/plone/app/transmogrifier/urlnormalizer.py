@@ -6,9 +6,9 @@ from plone.i18n.normalizer import urlnormalizer as normalizer
 from zope.interface import provider, implementer
 
 
+@provider(ISectionBlueprint)
+@implementer(ISection)
 class URLNormalizerSection(object):
-    provider(ISectionBlueprint)
-    implementer(ISection)
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous
@@ -26,7 +26,7 @@ class URLNormalizerSection(object):
 
     def __iter__(self):
         for item in self.previous:
-            sourcekey = self.sourcekey(*item.keys())[0]
+            sourcekey = self.sourcekey(*list(item.keys()))[0]
             if not sourcekey:   # not enough info to return a sensible id key
                 yield item
                 continue

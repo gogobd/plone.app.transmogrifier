@@ -62,7 +62,7 @@ def aTSchemaUpdaterSetUp(test):  # noqa: C901
             path = posixpath.join(self._path, id_)
             if path[0] == '/':
                 return False  # path is absolute
-            if isinstance(path, unicode):
+            if isinstance(path, str):
                 return False
             if path == 'not/existing/bar':
                 return False
@@ -79,7 +79,7 @@ def aTSchemaUpdaterSetUp(test):  # noqa: C901
             if self._last_field[0].endswith('notchanged'):
                 return 'nochange'
             if self._last_field[0].endswith('unicode'):
-                return u'\xe5'.encode('utf8')
+                return '\xe5'.encode('utf8')
 
         @property
         def accessor(self):
@@ -130,7 +130,7 @@ def aTSchemaUpdaterSetUp(test):  # noqa: C901
             self.sample = (
                 dict(_path='/spam/eggs/foo', fieldone='one value',
                      fieldtwo=2, nosuchfield='ignored',
-                     fieldnotchanged='nochange', fieldunicode=u'\xe5',),
+                     fieldnotchanged='nochange', fieldunicode='\xe5',),
                 dict(_path='not/existing/bar', fieldone='one value',
                      title='Should not be updated, not an existing path'),
                 dict(fieldone='one value',
@@ -139,7 +139,7 @@ def aTSchemaUpdaterSetUp(test):  # noqa: C901
                      title='Should not be updated, not an AT base object'),
             )
     provideUtility(SchemaSource,
-                   name=u'plone.app.transmogrifier.tests.schemasource')
+                   name='plone.app.transmogrifier.tests.schemasource')
 
 
 def workflowUpdaterSetUp(test):
@@ -153,7 +153,7 @@ def workflowUpdaterSetUp(test):
             path = posixpath.join(self._path, id_)
             if path[0] == '/':
                 return False  # path is absolute
-            if isinstance(path, unicode):
+            if isinstance(path, str):
                 return False
             if path == 'not/existing/bar':
                 return False
@@ -216,7 +216,7 @@ def workflowUpdaterSetUp(test):
                     )),
             )
     provideUtility(WorkflowSource,
-                   name=u'plone.app.transmogrifier.tests.workflowsource')
+                   name='plone.app.transmogrifier.tests.workflowsource')
 
 
 def browserDefaultSetUp(test):
@@ -231,7 +231,7 @@ def browserDefaultSetUp(test):
             path = posixpath.join(self._path, id_)
             if path[0] == '/':
                 return False  # path is absolute
-            if isinstance(path, unicode):
+            if isinstance(path, str):
                 return False
             if path == 'not/existing/bar':
                 return False
@@ -283,7 +283,7 @@ def browserDefaultSetUp(test):
                     title='Should not be updated, no layout or defaultpage'),
             )
     provideUtility(BrowserDefaultSource,
-                   name=u'plone.app.transmogrifier.tests.browserdefaultsource')
+                   name='plone.app.transmogrifier.tests.browserdefaultsource')
 
 
 def urlNormalizerSetUp(test):
@@ -298,7 +298,7 @@ def urlNormalizerSetUp(test):
             path = posixpath.join(self._path, id_)
             if path[0] == '/':
                 return False  # path is absolute
-            if isinstance(path, unicode):
+            if isinstance(path, str):
                 return False
             if path == 'not/existing/bar':
                 return False
@@ -323,7 +323,7 @@ def urlNormalizerSetUp(test):
                 dict(language='my language is en')
             )
     provideUtility(URLNormalizerSource,
-                   name=u'plone.app.transmogrifier.tests.urlnormalizersource')
+                   name='plone.app.transmogrifier.tests.urlnormalizersource')
 
 
 def criteriaSetUp(test):
@@ -338,7 +338,7 @@ def criteriaSetUp(test):
             path = posixpath.join(self._path, id_)
             if path[0] == '/':
                 return False  # path is absolute
-            if isinstance(path, unicode):
+            if isinstance(path, str):
                 return False
             if path == 'not/existing/bar':
                 return False
@@ -366,7 +366,7 @@ def criteriaSetUp(test):
                      title='Should not be updated, no criterion or field'),
             )
     provideUtility(CriteriaSource,
-                   name=u'plone.app.transmogrifier.tests.criteriasource')
+                   name='plone.app.transmogrifier.tests.criteriasource')
 
 
 def mimeencapsulatorSetUp(test):
@@ -386,7 +386,7 @@ def mimeencapsulatorSetUp(test):
                      _portrait_mimetype='image/jpeg'),
             )
     provideUtility(EncapsulatorSource,
-                   name=u'plone.app.transmogrifier.tests.encapsulatorsource')
+                   name='plone.app.transmogrifier.tests.encapsulatorsource')
 
     from OFS.Image import File
 
@@ -401,13 +401,13 @@ def mimeencapsulatorSetUp(test):
 
         def __iter__(self):
             for item in self.previous:
-                for key, value in item.iteritems():
+                for key, value in item.items():
                     if isinstance(value, File):
-                        print '%s: (%s) %s' % (
-                            key, value.content_type, str(value))
+                        print('%s: (%s) %s' % (
+                            key, value.content_type, str(value)))
                 yield item
     provideUtility(OFSFilePrinter,
-                   name=u'plone.app.transmogrifier.tests.ofsfileprinter')
+                   name='plone.app.transmogrifier.tests.ofsfileprinter')
 
 
 def uidSetUp(test):
@@ -422,7 +422,7 @@ def uidSetUp(test):
             path = posixpath.join(self._path, id_)
             if path[0] == '/':
                 return False  # path is absolute
-            if isinstance(path, unicode):
+            if isinstance(path, str):
                 return False
             if path == 'not/existing/bar':
                 return False
@@ -462,7 +462,7 @@ def uidSetUp(test):
                 # not referenceable
             )
     provideUtility(UIDSource,
-                   name=u'plone.app.transmogrifier.tests.uidsource')
+                   name='plone.app.transmogrifier.tests.uidsource')
 
 
 def reindexObjectSetup(test):
@@ -478,7 +478,7 @@ def reindexObjectSetup(test):
             path = posixpath.join(self._path, id_)
             if path[0] == '/':
                 return False  # path is absolute
-            if isinstance(path, unicode):
+            if isinstance(path, str):
                 return False
             if path == 'not/existing/bar':
                 return False
@@ -518,7 +518,7 @@ def reindexObjectSetup(test):
                      title='Should not be reindexed, not an existing path'),
             )
     provideUtility(ReindexObjectSource,
-                   name=u'plone.app.transmogrifier.tests.reindexobjectsource')
+                   name='plone.app.transmogrifier.tests.reindexobjectsource')
 
 
 def redirectorSetUp(test):
@@ -544,7 +544,7 @@ def pathfixerSetUp(test):
                 dict(_path='/spam/eggs/another'),
             )
     provideUtility(SchemaSource,
-                   name=u'plone.app.transmogrifier.tests.schemasource')
+                   name='plone.app.transmogrifier.tests.schemasource')
 
 
 def datesupdaterSetUp(test):  # noqa: C901
@@ -556,7 +556,7 @@ def datesupdaterSetUp(test):  # noqa: C901
             path = posixpath.join(self._path, id_)
             if path[0] == '/':
                 return False  # path is absolute
-            if isinstance(path, unicode):
+            if isinstance(path, str):
                 return False
             if path == 'not/existing/bar':
                 return False
@@ -644,7 +644,7 @@ def datesupdaterSetUp(test):  # noqa: C901
                 )
             )
     provideUtility(SchemaSource,
-                   name=u'plone.app.transmogrifier.tests.schemasource')
+                   name='plone.app.transmogrifier.tests.schemasource')
 
 
 def test_suite():

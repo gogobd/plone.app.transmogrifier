@@ -11,9 +11,9 @@ from plone.uuid.interfaces import IMutableUUID
 from zope.interface import provider, implementer
 
 
+@provider(ISectionBlueprint)
+@implementer(ISection)
 class UIDUpdaterSection(object):
-    provider(ISectionBlueprint)
-    implementer(ISection)
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous
@@ -35,8 +35,8 @@ class UIDUpdaterSection(object):
 
         for item in self.previous:
 
-            pathkey = self.pathkey(*item.keys())[0]
-            uidkey = self.uidkey(*item.keys())[0]
+            pathkey = self.pathkey(*list(item.keys()))[0]
+            uidkey = self.uidkey(*list(item.keys()))[0]
 
             if not pathkey or not uidkey:  # not enough info
                 yield item
