@@ -77,7 +77,7 @@
       />
 
   <transmogrifier:registerConfig
-      name="plone.app.transmogrifier.xmlwalker"
+      name="plone_app_transmogrifier_xmlwalker"
       title="Web Site Importer"
       description="Import a web site by crawling it's links and
                    extracting field and other values."
