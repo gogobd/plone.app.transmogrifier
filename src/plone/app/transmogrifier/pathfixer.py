@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.transmogrifier.interfaces import ISection
 from collective.transmogrifier.interfaces import ISectionBlueprint
 from collective.transmogrifier.utils import Matcher
@@ -9,7 +8,7 @@ from zope.interface import implementer
 
 @provider(ISectionBlueprint)
 @implementer(ISection)
-class PathFixer(object):
+class PathFixer:
     """Changes the start of the path.
     """
 
@@ -57,7 +56,7 @@ class PathFixer(object):
             if stripstring and path.startswith(stripstring):
                 path = path[len(stripstring):]
             if prependstring:
-                path = '%s%s' % (prependstring, path)
+                path = f'{prependstring}{path}'
 
             # convert the path to str and remove invalid characters
             item[pathkey] = path.encode('ascii', 'ignore')

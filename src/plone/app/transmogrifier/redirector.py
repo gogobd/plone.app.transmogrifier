@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.transmogrifier.interfaces import ISection
 from collective.transmogrifier.interfaces import ISectionBlueprint
 from collective.transmogrifier.utils import Condition
@@ -22,7 +21,7 @@ except ImportError:
 
 @provider(ISectionBlueprint)
 @implementer(ISection)
-class RedirectorSection(object):
+class RedirectorSection:
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous

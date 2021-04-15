@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.transmogrifier.interfaces import ISection
 from collective.transmogrifier.interfaces import ISectionBlueprint
 from collective.transmogrifier.utils import defaultMatcher
@@ -17,7 +16,7 @@ logger = logging.getLogger('plone.app.transmogrifier.reindexobject')
 
 @provider(ISectionBlueprint)
 @implementer(ISection)
-class ReindexObjectSection(object):
+class ReindexObjectSection:
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous

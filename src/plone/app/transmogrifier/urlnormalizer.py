@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.transmogrifier.interfaces import ISection, ISectionBlueprint
 from collective.transmogrifier.utils import Expression
 from collective.transmogrifier.utils import Matcher
@@ -8,7 +7,7 @@ from zope.interface import provider, implementer
 
 @provider(ISectionBlueprint)
 @implementer(ISection)
-class URLNormalizerSection(object):
+class URLNormalizerSection:
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous

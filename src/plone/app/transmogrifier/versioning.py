@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
 from collective.transmogrifier.interfaces import ISection
 from collective.transmogrifier.interfaces import ISectionBlueprint
@@ -9,7 +8,7 @@ VERSIONABLE_KEY = 'plone.app.transmogrifier.versioning:versionable'
 
 
 @implementer(ISection)
-class BaseVersioningSection(object):
+class BaseVersioningSection:
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous

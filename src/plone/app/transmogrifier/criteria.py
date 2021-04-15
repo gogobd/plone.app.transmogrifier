@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Acquisition import aq_base
 from Products.ATContentTypes.interface import IATTopic
 from collective.transmogrifier.interfaces import ISection, ISectionBlueprint
@@ -9,7 +8,7 @@ from zope.interface import provider, implementer
 
 @provider(ISectionBlueprint)
 @implementer(ISection)
-class CriterionAdder(object):
+class CriterionAdder:
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous
@@ -48,9 +47,9 @@ class CriterionAdder(object):
             field = item[fieldkey]
 
             if IATTopic.providedBy(obj):
-                critid = 'crit__%s_%s' % (field, criterion)
+                critid = f'crit__{field}_{criterion}'
                 if getattr(aq_base(obj), critid, None) is None:
                     obj.addCriterion(field, criterion)
-                item[pathkey] = '%s/%s' % (path, critid)
+                item[pathkey] = f'{path}/{critid}'
 
             yield item

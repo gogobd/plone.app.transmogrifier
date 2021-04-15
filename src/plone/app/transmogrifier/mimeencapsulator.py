@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from OFS.Image import File
 from collective.transmogrifier.interfaces import ISection, ISectionBlueprint
 from collective.transmogrifier.utils import Condition
@@ -9,7 +8,7 @@ from zope.interface import provider, implementer
 
 @provider(ISectionBlueprint)
 @implementer(ISection)
-class MimeEncapsulatorSection(object):
+class MimeEncapsulatorSection:
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous

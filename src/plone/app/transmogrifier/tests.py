@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from DateTime.DateTime import DateTime
 from Products.Five import zcml
 from collective.transmogrifier.interfaces import ISectionBlueprint, ISection
@@ -27,7 +26,7 @@ def sectionsSetUp(test):
 class MockObjectManager(MockObjectManager):
 
     def _getOb(self, id_, default=_marker):
-        obj = super(MockObjectManager, self)._getOb(id_, default=default)
+        obj = super()._getOb(id_, default=default)
         if getattr(obj, '_path', '').endswith('/notatcontent'):
             return object()
         return obj
@@ -36,17 +35,17 @@ class MockObjectManager(MockObjectManager):
 def portalTransformsSetUp(test):
     sectionsSetUp(test)
 
-    class MockPortalTransforms(object):
+    class MockPortalTransforms:
 
         def __call__(self, transform, data):
-            return 'Transformed %r using the %s transform' % (data, transform)
+            return f'Transformed {data!r} using the {transform} transform'
 
         def convertToData(self, target, data, mimetype=None):
             if mimetype is not None:
-                return 'Transformed %r from %s to %s' % (
+                return 'Transformed {!r} from {} to {}'.format(
                     data, mimetype, target)
             else:
-                return 'Transformed %r to %s' % (data, target)
+                return f'Transformed {data!r} to {target}'
     test.globs['plone'].portal_transforms = MockPortalTransforms()
 
 
@@ -79,7 +78,7 @@ def aTSchemaUpdaterSetUp(test):  # noqa: C901
             if self._last_field[0].endswith('notchanged'):
                 return 'nochange'
             if self._last_field[0].endswith('unicode'):
-                return '\xe5'.encode('utf8')
+                return '\xe5'.encode()
 
         @property
         def accessor(self):
@@ -126,7 +125,7 @@ def aTSchemaUpdaterSetUp(test):  # noqa: C901
         implementer(ISection)
 
         def __init__(self, *args, **kw):
-            super(SchemaSource, self).__init__(*args, **kw)
+            super().__init__(*args, **kw)
             self.sample = (
                 dict(_path='/spam/eggs/foo', fieldone='one value',
                      fieldtwo=2, nosuchfield='ignored',
@@ -181,7 +180,7 @@ def workflowUpdaterSetUp(test):
         implementer(ISection)
 
         def __init__(self, *args, **kw):
-            super(WorkflowSource, self).__init__(*args, **kw)
+            super().__init__(*args, **kw)
             self.sample = (
                 dict(
                     _path='/spam/eggs/foo',
@@ -254,7 +253,7 @@ def browserDefaultSetUp(test):
         implementer(ISection)
 
         def __init__(self, *args, **kw):
-            super(BrowserDefaultSource, self).__init__(*args, **kw)
+            super().__init__(*args, **kw)
             self.sample = (
                 dict(
                     _path='/spam/eggs/foo',
@@ -312,7 +311,7 @@ def urlNormalizerSetUp(test):
         implementer(ISection)
 
         def __init__(self, *args, **kw):
-            super(URLNormalizerSource, self).__init__(*args, **kw)
+            super().__init__(*args, **kw)
             self.sample = (
                 dict(title='mytitle'),
                 dict(title='Is this a title of any sort?'),
@@ -357,7 +356,7 @@ def criteriaSetUp(test):
         implementer(ISection)
 
         def __init__(self, *args, **kw):
-            super(CriteriaSource, self).__init__(*args, **kw)
+            super().__init__(*args, **kw)
             self.sample = (
                 dict(_path='/spam/eggs/foo', _criterion='bar', _field='baz'),
                 dict(_path='not/existing/bar', _criterion='bar', _field='baz',
@@ -377,7 +376,7 @@ def mimeencapsulatorSetUp(test):
         implementer(ISection)
 
         def __init__(self, *args, **kw):
-            super(EncapsulatorSource, self).__init__(*args, **kw)
+            super().__init__(*args, **kw)
             self.sample = (
                 dict(_data='foobarbaz', _mimetype='application/x-test-data'),
                 dict(_mimetype='skip/nodata'),
@@ -390,7 +389,7 @@ def mimeencapsulatorSetUp(test):
 
     from OFS.Image import File
 
-    class OFSFilePrinter(object):
+    class OFSFilePrinter:
 
         """Prints out data on any OFS.Image.File object in the item"""
         provider(ISectionBlueprint)
@@ -403,7 +402,7 @@ def mimeencapsulatorSetUp(test):
             for item in self.previous:
                 for key, value in item.items():
                     if isinstance(value, File):
-                        print('%s: (%s) %s' % (
+                        print('{}: ({}) {}'.format(
                             key, value.content_type, str(value)))
                 yield item
     provideUtility(OFSFilePrinter,
@@ -448,7 +447,7 @@ def uidSetUp(test):
         implementer(ISection)
 
         def __init__(self, *args, **kw):
-            super(UIDSource, self).__init__(*args, **kw)
+            super().__init__(*args, **kw)
             self.sample = (
                 dict(_path='/spam/eggs/foo', _uid='abc',),  # will be set
                 dict(_path='/spam/eggs/bar', _uid='xyz',),  # same as default
@@ -496,7 +495,7 @@ def reindexObjectSetup(test):
             self.reindexed.append((
                 self._last_path[0],
                 'reindexed',
-                'indexes: {0}'.format('all' if not idxs else ', '.join(idxs)))
+                'indexes: {}'.format('all' if not idxs else ', '.join(idxs)))
             )
 
     test.globs['plone'] = MockPortal()
@@ -507,7 +506,7 @@ def reindexObjectSetup(test):
         implementer(ISection)
 
         def __init__(self, *args, **kw):
-            super(ReindexObjectSource, self).__init__(*args, **kw)
+            super().__init__(*args, **kw)
             self.sample = (
                 dict(_path='/spam/eggs/foo'),  # will be set
                 dict(_path='/spam/eggs/bar'),  # will be set
@@ -537,7 +536,7 @@ def pathfixerSetUp(test):
         implementer(ISection)
 
         def __init__(self, *args, **kw):
-            super(SchemaSource, self).__init__(*args, **kw)
+            super().__init__(*args, **kw)
             self.sample = (
                 dict(_path='/spam/eggs/foo'),
                 dict(_path='relative/path'),
@@ -604,7 +603,7 @@ def datesupdaterSetUp(test):  # noqa: C901
         implementer(ISection)
 
         def __init__(self, *args, **kw):
-            super(SchemaSource, self).__init__(*args, **kw)
+            super().__init__(*args, **kw)
             self.sample = (
                 dict(
                     _path='/spam/eggs/foo',

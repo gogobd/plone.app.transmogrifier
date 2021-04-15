@@ -54,12 +54,12 @@
       component=".mimeencapsulator.MimeEncapsulatorSection"
       name="plone.app.transmogrifier.mimeencapsulator"
       />
-  <!--
+
   <utility
       component=".uidupdater.UIDUpdaterSection"
       name="plone.app.transmogrifier.uidupdater"
       />
-  -->
+
   <utility
       component=".reindexobject.ReindexObjectSection"
       name="plone.app.transmogrifier.reindexobject"

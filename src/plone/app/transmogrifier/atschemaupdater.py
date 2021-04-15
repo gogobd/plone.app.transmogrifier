@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Products.Archetypes.event import ObjectEditedEvent
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Archetypes.interfaces import IBaseObject
@@ -44,7 +43,7 @@ def set(field, obj, val):
 
 @provider(ISectionBlueprint)
 @implementer(ISection)
-class ATSchemaUpdaterSection(object):
+class ATSchemaUpdaterSection:
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.CMFCore.utils import getToolByName
 from collective.transmogrifier.interfaces import ISection
@@ -13,7 +12,7 @@ from zope.interface import provider, implementer
 
 @provider(ISectionBlueprint)
 @implementer(ISection)
-class WorkflowUpdaterSection(object):
+class WorkflowUpdaterSection:
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous

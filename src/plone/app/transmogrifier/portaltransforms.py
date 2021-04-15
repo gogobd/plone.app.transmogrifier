@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
 from collective.transmogrifier.interfaces import ISection
 from collective.transmogrifier.interfaces import ISectionBlueprint
@@ -8,7 +7,7 @@ from zope.interface import provider, implementer
 
 @provider(ISectionBlueprint)
 @implementer(ISection)
-class PortalTransformsSection(object):
+class PortalTransformsSection:
 
     def __init__(self, transmogrifier, name, options, previous):
         self.ptransforms = getToolByName(transmogrifier.context,

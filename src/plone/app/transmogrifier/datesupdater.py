@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from DateTime import DateTime
 from collective.transmogrifier.interfaces import ISection
 from collective.transmogrifier.interfaces import ISectionBlueprint
@@ -10,7 +9,7 @@ from zope.interface import implementer
 
 @provider(ISectionBlueprint)
 @implementer(ISection)
-class DatesUpdater(object):
+class DatesUpdater:
     """Sets creation and modification dates on objects.
     """
 

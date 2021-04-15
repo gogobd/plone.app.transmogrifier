@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from Products.Archetypes.config import UUID_ATTR
-from Products.Archetypes.interfaces import IReferenceable
 from collective.transmogrifier.interfaces import ISection
 from collective.transmogrifier.interfaces import ISectionBlueprint
 from collective.transmogrifier.utils import Matcher
@@ -11,9 +8,9 @@ from plone.uuid.interfaces import IMutableUUID
 from zope.interface import provider, implementer
 
 
-@provider(ISectionBlueprint)
 @implementer(ISection)
-class UIDUpdaterSection(object):
+@provider(ISectionBlueprint)
+class UIDUpdaterSection:
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous
@@ -49,14 +46,6 @@ class UIDUpdaterSection(object):
             if obj is None:  # path doesn't exist
                 yield item
                 continue
-
-            if IReferenceable.providedBy(obj):
-                oldUID = obj.UID()
-                if oldUID != uid:
-                    if not oldUID:
-                        setattr(obj, UUID_ATTR, uid)
-                    else:
-                        obj._setUID(uid)
 
             if IAttributeUUID.providedBy(obj):
                 IMutableUUID(obj).set(uid)
